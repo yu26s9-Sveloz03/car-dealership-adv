@@ -8,7 +8,7 @@ public class DealershipFileManager {
 
     public Dealership getDealership() {
         try {
-            FileReader fileReader = new FileReader("dealership.csv");
+            FileReader fileReader = new FileReader("inventory.csv");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String firstLine = bufferedReader.readLine();
             String[] dealershipInfo = firstLine.split("\\|");
@@ -16,8 +16,9 @@ public class DealershipFileManager {
             return dealership;
         } catch (Exception e) {
             System.out.println("Can't find the file.");
-
+            return new Dealership("","","");
         }
-
     }
+
+    public void saveDealership(Dealership dealership) {}
 }
