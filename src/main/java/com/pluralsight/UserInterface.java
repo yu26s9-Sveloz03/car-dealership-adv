@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,8 +24,7 @@ public class UserInterface {
     public void display() {
         Scanner scanner = new Scanner(System.in);
         init();
-        boolean isTrue = true;
-        while (isTrue){
+        while (true){
             System.out.println("-----Dealership-----\n\t" +
                     "Please choose one:\n\t" +
                     "1 - Search by price\n\t" +
@@ -50,7 +52,7 @@ public class UserInterface {
                 case 9 -> processRemoveVehicleRequest();
                 case 0 -> {
                     System.out.println("Goodbye!");
-                    isTrue = false;
+                    return;
                 }
                 default -> System.out.println("Must enter a valid command");
             }
@@ -145,10 +147,22 @@ public class UserInterface {
         String price = scanner.nextLine();
         Vehicle vehicle = new Vehicle(Integer.parseInt(vin),Integer.parseInt(year),make,model,vehicleType,color,Integer.parseInt(odometer),Double.parseDouble(price));
         dealership.addVehicle(vehicle);
+        DealershipFileManager dealershipFileManager = new DealershipFileManager();
+        dealershipFileManager.saveDealership(dealership);
     }
 
     public void processRemoveVehicleRequest(){
         Scanner scanner = new Scanner(System.in);
+        System.out.println("What is the VIN number of the car you want to remove?");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+        for (int i = dealership.getAllVehicles().size() - 1; i >= 0; i--) {
+            if (dealership.getAllVehicles().get(i).getVin() == vin) {
+                dealership.removeVehicle(dealership.getAllVehicles().get(i));
+            }
+        }
+        DealershipFileManager dealershipFileManager = new DealershipFileManager();
+        dealershipFileManager.saveDealership(dealership);
     }
 
     private void displayVehicles(ArrayList<Vehicle> vehicleArrayList) {
@@ -165,10 +179,5 @@ public class UserInterface {
                     vehicle.getVehicleType(),vehicle.getColor(),
                     vehicle.getOdometer(),vehicle.getPrice());
         }
-    }
-
-    public void processAllVehiclesRequest() {
-        ArrayList<Vehicle> vehicleList = this.dealership.getAllVehicles();
-        displayVehicles(vehicleList);
     }
 }
