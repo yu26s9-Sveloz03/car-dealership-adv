@@ -21,7 +21,8 @@ public class UserInterface {
     public void display() {
         Scanner scanner = new Scanner(System.in);
         init();
-        while (true){
+        boolean isTrue = true;
+        while (isTrue){
             System.out.println("-----Dealership-----\n\t" +
                     "Please choose one:\n\t" +
                     "1 - Search by price\n\t" +
@@ -49,8 +50,9 @@ public class UserInterface {
                 case 9 -> processRemoveVehicleRequest();
                 case 0 -> {
                     System.out.println("Goodbye!");
-                    break;
+                    isTrue = false;
                 }
+                default -> System.out.println("Must enter a valid command");
             }
         }
     }
@@ -78,6 +80,7 @@ public class UserInterface {
             System.out.printf("VIN: %d\n" +
                     "Year: %d\n" +
                     "Make: %s\n" +
+                    "Model: %s" +
                     "Vehicle Type: %s\n" +
                     "Color: %s\n" +
                     "Odometer: %d\n" +
@@ -90,7 +93,7 @@ public class UserInterface {
 
     public void processAllVehiclesRequest() {
         List<Vehicle> vehicleList = this.dealership.getAllVehicles();
-        ArrayList<Vehicle> vehicleArrayList = new ArrayList<>(vehicleList)
+        ArrayList<Vehicle> vehicleArrayList = new ArrayList<>(vehicleList);
         displayVehicles(vehicleArrayList);
     }
 }
