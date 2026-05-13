@@ -17,17 +17,65 @@ public class Dealership {
         this.inventory = new ArrayList<Vehicle>();
     }
 
-    public void getVehiclesByPrice(double min, double max) {}
+    public List<Vehicle> getVehiclesByPrice(double min, double max) {
+        List<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : this.inventory) {
+            if (vehicle.getPrice() >= min && vehicle.getPrice() <= max){
+                vehicleList.add(vehicle);
+            }
+        }
+        return vehicleList;
+    }
 
-    public void getVehiclesByMake(String make, String model) {}
+    public List<Vehicle> getVehiclesByMake(String make, String model) {
+        List<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : this.inventory) {
+            if (vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model)){
+                vehicleList.add(vehicle);
+            }
+        }
+        return vehicleList;
+    }
 
-    public void getVehiclesByYear(double min, double max) {}
+    public List<Vehicle> getVehiclesByYear(double min, double max) {
+        List<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : this.inventory) {
+            if (vehicle.getYear() >= min && vehicle.getYear() <= max){
+                vehicleList.add(vehicle);
+            }
+        }
+        return vehicleList;
+    }
 
-    public void getVehicleByColor(String color) {}
+    public List<Vehicle> getVehicleByColor(String color) {
+        List<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : this.inventory) {
+            if (vehicle.getMake().equalsIgnoreCase(color)){
+                vehicleList.add(vehicle);
+            }
+        }
+        return vehicleList;
+    }
 
-    public void getVehiclesByMileage(int min, int max) {}
+    public List<Vehicle> getVehiclesByMileage(int min, int max) {
+        List<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : this.inventory) {
+            if (vehicle.getOdometer() >= min && vehicle.getOdometer() <= max){
+                vehicleList.add(vehicle);
+            }
+        }
+        return vehicleList;
+    }
 
-    public void getVehiclesByType(String vehicleType) {}
+    public List<Vehicle> getVehiclesByType(String vehicleType) {
+        List<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : this.inventory) {
+            if (vehicle.getVehicleType().equalsIgnoreCase(vehicleType)){
+                vehicleList.add(vehicle);
+            }
+        }
+        return vehicleList;
+    }
 
     public List<Vehicle> getAllVehicles() {
         List<Vehicle> vehicleList = new ArrayList<>();
@@ -39,7 +87,9 @@ public class Dealership {
         this.inventory.add(vehicle);
     }
 
-    public void remove() {}
+    public void removeVehicle(Vehicle vehicle) {
+        this.inventory.remove(vehicle);
+    }
 
     public String getName() {
         return name;
